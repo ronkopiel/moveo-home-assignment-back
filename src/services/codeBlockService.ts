@@ -4,7 +4,6 @@ import  { CodeBlockModel, ICodeBlock } from '../models/CodeBlockModel';
 export const getAllCodeBlocks = async (): Promise<ICodeBlock[] | null> => {
     try {
       const codeBlocks = await CodeBlockModel.find();
-      console.log('codeBlocks', codeBlocks)
       return codeBlocks;
     } catch (error) {
       throw new Error('Error fetching code blocks');
