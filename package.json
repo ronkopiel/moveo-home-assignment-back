@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prod": "pm2 start dist/index.js --name your-app-name",
+    "start": "index.js",
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
     "copy": "copyfiles -u 1 \"src/**/*.json\" \"src/**/*.html\" \"src/**/*.css\" \"src/**/*.ico\" \".env\" dist",
     "build": "npm install && tsc && npm run copy"
