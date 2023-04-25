@@ -13,8 +13,7 @@ const PORT = process.env.PORT;
 
 const corsOptions = {
   origin: 'https://move-codeblock-front.onrender.com/',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: 'Content-Type,Authorization',
+  methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
 };
 
 const httpServer = http.createServer(app);
