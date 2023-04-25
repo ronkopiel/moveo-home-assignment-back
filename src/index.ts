@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin: 'https://move-codeblock-front.onrender.com/',
+  origin: '*',
   methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
 };
 
