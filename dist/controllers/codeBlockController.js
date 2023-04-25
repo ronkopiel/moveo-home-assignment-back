@@ -1,27 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -32,12 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateCodeBlock = exports.getCodeBlockByTitle = void 0;
-const codeBlockService = __importStar(require("../services/codeBlockService"));
-const getCodeBlockByTitle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateCode = exports.getCodeBlock = exports.getCodeBlocks = void 0;
+const codeBlockService_1 = require("../services/codeBlockService");
+'../services/codeBlockService';
+const getCodeBlocks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const codeBlocks = yield (0, codeBlockService_1.getAllCodeBlocks)();
+        if (codeBlocks) {
+            console.log('codeBlocks', codeBlocks);
+            res.json(codeBlocks);
+        }
+        else {
+            res.status(404).json({ message: 'Code block not found' });
+        }
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Error fetching code block', error });
+    }
+});
+exports.getCodeBlocks = getCodeBlocks;
+const getCodeBlock = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const title = req.params.title;
     try {
-        const codeBlock = yield codeBlockService.getCodeBlockByTitle(title);
+        const codeBlock = yield (0, codeBlockService_1.getCodeBlockByTitle)(title);
         if (codeBlock) {
             res.json(codeBlock);
         }
@@ -49,12 +43,12 @@ const getCodeBlockByTitle = (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(500).json({ message: 'Error fetching code block', error });
     }
 });
-exports.getCodeBlockByTitle = getCodeBlockByTitle;
-const updateCodeBlock = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getCodeBlock = getCodeBlock;
+const updateCode = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const title = req.params.title;
     const newCode = req.body.code;
     try {
-        const updatedCodeBlock = yield codeBlockService.updateCodeBlock(title, newCode);
+        const updatedCodeBlock = yield (0, codeBlockService_1.updateCodeBlock)(title, newCode);
         if (updatedCodeBlock) {
             res.status(200).json({ message: 'Code block updated' });
         }
@@ -66,4 +60,5 @@ const updateCodeBlock = (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(500).json({ message: 'Error updating code block', error });
     }
 });
-exports.updateCodeBlock = updateCodeBlock;
+exports.updateCode = updateCode;
+//# sourceMappingURL=codeBlockController.js.map

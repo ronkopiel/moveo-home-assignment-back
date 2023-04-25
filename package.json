@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prod": "pm2 start dist/index.js --name your-app-name",
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
     "build": "tsc"
   },

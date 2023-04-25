@@ -8,15 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateCodeBlock = exports.getCodeBlockByTitle = void 0;
-const CodeBlock_1 = __importDefault(require("../models/CodeBlock"));
+exports.updateCodeBlock = exports.getCodeBlockByTitle = exports.getAllCodeBlocks = void 0;
+const CodeBlockModel_1 = require("../models/CodeBlockModel");
+const getAllCodeBlocks = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const codeBlocks = yield CodeBlockModel_1.CodeBlockModel.find();
+        return codeBlocks;
+    }
+    catch (error) {
+        throw new Error('Error fetching code blocks');
+    }
+});
+exports.getAllCodeBlocks = getAllCodeBlocks;
 const getCodeBlockByTitle = (title) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const codeBlock = yield CodeBlock_1.default.findOne({ title });
+        const codeBlock = yield CodeBlockModel_1.CodeBlockModel.findOne({ title });
         return codeBlock;
     }
     catch (error) {
@@ -26,7 +33,7 @@ const getCodeBlockByTitle = (title) => __awaiter(void 0, void 0, void 0, functio
 exports.getCodeBlockByTitle = getCodeBlockByTitle;
 const updateCodeBlock = (title, newCode) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const codeBlock = yield CodeBlock_1.default.findOneAndUpdate({ title }, { code: newCode }, { new: true });
+        const codeBlock = yield CodeBlockModel_1.CodeBlockModel.findOneAndUpdate({ title }, { code: newCode }, { new: true });
         return codeBlock;
     }
     catch (error) {
@@ -34,3 +41,4 @@ const updateCodeBlock = (title, newCode) => __awaiter(void 0, void 0, void 0, fu
     }
 });
 exports.updateCodeBlock = updateCodeBlock;
+//# sourceMappingURL=codeBlockService.js.map
