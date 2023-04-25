@@ -11,11 +11,15 @@ dotenv.config()
 const app = express();
 const PORT = process.env.PORT;
 
+const corsOptions = {
+  origin: 'https://move-codeblock-front.onrender.com/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+};
+
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
-  cors: {
-    origin: 'https://move-codeblock-front.onrender.com/'
-  },
+  cors: corsOptions,
 });
 
 // Connect to MongoDB
