@@ -6,7 +6,8 @@
   "scripts": {
     "prod": "pm2 start dist/index.js --name your-app-name",
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
-    "build": "tsc"
+    "copy": "copyfiles -u 1 \"src/**/*.json\" \"src/**/*.html\" \"src/**/*.css\" \"src/**/*.ico\" \".env\" dist",
+    "build": "tsc && npm run copy"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "@types/express": "^4.17.17",
     "@types/mongoose": "^5.11.97",
     "@types/socket.io": "^3.0.2",
+    "copyfiles": "^2.4.1",
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
